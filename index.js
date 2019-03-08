@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send({ hi: "there" });
+  res.send({ bye: "buddy" });
 });
 
 //heroku gives us enviroment variable when it's deployed ,for default (dev enviroment ) add 5000 to the end
