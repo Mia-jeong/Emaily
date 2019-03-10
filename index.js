@@ -50,3 +50,4 @@ app.listen(PORT);
 
 //npm install --save mongoose
 //npm install --save cookie-session
+//npm install passport-google-oauth20@2 --save
