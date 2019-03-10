@@ -28,8 +28,7 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
-      proxy: true, //trust the proxy
-      userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+      proxy: true //trust the proxy
     },
     (accessToken, refreshToken, profile, done) => {
       //search to see if the id is already existed in the collection
