@@ -28,23 +28,21 @@ passport.use(
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback",
-      proxy: true //trust the proxy
+      proxy: true
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       //search to see if the id is already existed in the collection
       //whenever we make query to reach out to DB, it's an asynchronous operation
       // query returns promise
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          //we already have a record with the give profie id
-          done(null, existingUser);
-        } else {
-          //we don't have a user record with this iD, make a new record
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        //we already have a record with the give profie id
+        return done(null, existingUser);
+      }
+      //we don't have a user record with this iD, make a new record
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
 );
