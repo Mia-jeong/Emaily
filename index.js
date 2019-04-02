@@ -7,6 +7,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 require("./models/User"); //make user collection, you should do it in order.
+require("./models/Survey");
 require("./services/passport");
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(passport.session());
 // const authRoutes = require("./routes/authRoutes");
 require("./routes/authRoutes")(app);
 require("./routes/billingRoutes")(app);
+require("./routes/surveyRoutes")(app);
 
 if (process.env.NODE_ENV === "production") {
   //Express will serve up production assets
@@ -83,3 +85,4 @@ app.listen(PORT);
 //npm install --save concurrently
 //npm install --save stripe
 //npm install --save body-parser
+//npm install --save sendgrid
